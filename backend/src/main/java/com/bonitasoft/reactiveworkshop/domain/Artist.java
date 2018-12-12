@@ -12,12 +12,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
 public class Artist {
 
     @Id
     private String id;
     private String name;
+    private String genre;
 
 
 }

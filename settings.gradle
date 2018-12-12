@@ -1,4 +1,5 @@
 rootProject.name = 'reactive-workshop'
 
 
+include 'external-service'
 include 'backend'

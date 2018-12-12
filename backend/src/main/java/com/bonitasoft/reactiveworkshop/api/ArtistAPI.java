@@ -1,5 +1,7 @@
 package com.bonitasoft.reactiveworkshop.api;
 
+import java.util.List;
+
 import com.bonitasoft.reactiveworkshop.domain.Artist;
 import com.bonitasoft.reactiveworkshop.exception.NotFoundException;
 import com.bonitasoft.reactiveworkshop.repository.ArtistRepository;
@@ -18,7 +20,12 @@ public class ArtistAPI {
     }
 
     @GetMapping("/artist/{id}")
-    public Artist get(@PathVariable String id) throws NotFoundException {
+    public Artist findById(@PathVariable String id) throws NotFoundException {
         return artistRepository.findById(id).orElseThrow(NotFoundException::new);
+    }
+
+    @GetMapping("/artists")
+    public List<Artist> findAll() throws NotFoundException {
+        return artistRepository.findAll();
     }
 }
