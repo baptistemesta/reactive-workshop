@@ -29,7 +29,6 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
-
         repository.deleteAll();
 
         List<Artist> allArtists = new ArrayList<>();
@@ -50,7 +49,8 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
         }
         Flux.fromIterable(allArtists)
                 .distinct(Artist::getId)
-                .subscribe(repository::insert);
+                .subscribe(repository::save);
+//                .subscribe(repository::insert);
 //                .deleteAll()
 //                .thenMany(
 //                        Flux
