@@ -72,13 +72,13 @@ and should return something like
 ```json
 [
       {
-        "artistId": "dfjksl342f32"
+        "artistId": "dfjksl342f32",
         "arstistName": "Radiohead",
         "userName": "johndoe",
         "comment": "Nice band!"
       },
       {
-        "artistId": "fdsklj39fsjl"
+        "artistId": "fdsklj39fsjl",
         "arstistName": "Archive",
         "userName": "walterbates",
         "comment": "It rocks"
@@ -95,13 +95,13 @@ and return an infinite stream of json like this:
 
 ```json
 {
-  "artistId": "dfjksl342f32"
+  "artistId": "dfjksl342f32",
   "arstistName": "Radiohead",
   "userName": "johndoe",
   "comment": "Nice band!"
 }
 {
-  "artistId": "fdsklj39fsjl"
+  "artistId": "fdsklj39fsjl",
   "arstistName": "Archive",
   "userName": "walterbates",
    "comment": "It rocks"
