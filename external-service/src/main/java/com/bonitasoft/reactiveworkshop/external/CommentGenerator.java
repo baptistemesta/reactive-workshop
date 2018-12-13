@@ -38,7 +38,7 @@ public class CommentGenerator {
         });
     }
 
-    public static List<String> parseArtists() {
+    private static List<String> parseArtists() {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(CommentGenerator.class.getResourceAsStream("/artists_only")))) {
             return reader.lines().map(name -> {
                 try {
