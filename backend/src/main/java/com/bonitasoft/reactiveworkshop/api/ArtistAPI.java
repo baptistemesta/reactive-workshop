@@ -1,25 +1,26 @@
 package com.bonitasoft.reactiveworkshop.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.bonitasoft.reactiveworkshop.domain.Artist;
 import com.bonitasoft.reactiveworkshop.domain.ArtistWithComments;
 import com.bonitasoft.reactiveworkshop.domain.ArtistWithComments.ArtistWithCommentsBuilder;
+import com.bonitasoft.reactiveworkshop.domain.ArtistWithComments.Comment;
 import com.bonitasoft.reactiveworkshop.exception.NotFoundException;
 import com.bonitasoft.reactiveworkshop.repository.ArtistRepository;
+import com.bonitasoft.reactiveworkshop.repository.CommentsClient;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@AllArgsConstructor
 public class ArtistAPI {
 
-
-    private ArtistRepository artistRepository;
-
-    public ArtistAPI(ArtistRepository artistRepository) {
-        this.artistRepository = artistRepository;
-    }
+    private final ArtistRepository artistRepository;
+    private final CommentsClient commentsClient;
 
     @GetMapping("/artist/{id}")
     public Artist findById(@PathVariable String id) throws NotFoundException {
@@ -30,11 +31,13 @@ public class ArtistAPI {
     public ArtistWithComments findCommentsByArtistId(@PathVariable String id) throws NotFoundException {
         Artist artist = findById(id);
 
-        ArtistWithCommentsBuilder artistWithCommentsBuilder = ArtistWithComments.builder().artistId(artist.getId())
-                .artistName(artist.getName())
-                .genre(artist.getGenre());
+        List<Comment> comments = commentsClient.getComments(id);
 
-        return artistWithCommentsBuilder.build();
+        return ArtistWithComments.builder().artistId(artist.getId())
+                .artistName(artist.getName())
+                .genre(artist.getGenre())
+                .comments(comments)
+                .build();
     }
 
     @GetMapping("/artists")
