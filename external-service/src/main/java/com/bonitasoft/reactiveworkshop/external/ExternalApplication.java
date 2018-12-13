@@ -18,6 +18,7 @@ public class ExternalApplication {
         SpringApplication.run(ExternalApplication.class, args);
     }
 
+    private static final long REPEAT_NUMBER_FOR_10_COMMENTS = 9L;
 
     private CommentGenerator commentGenerator;
 
@@ -28,7 +29,7 @@ public class ExternalApplication {
     @GetMapping("/comments/{artistId}/last10")
     Flux<Comment> findLast10Comments(@PathVariable String artistId) {
         return commentGenerator.generateComment(artistId)
-                .repeat(10);
+                .repeat(REPEAT_NUMBER_FOR_10_COMMENTS);
 
     }
     @GetMapping(path = "/comments/stream", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
@@ -37,7 +38,7 @@ public class ExternalApplication {
     }
     @GetMapping("/comments/last10")
     Flux<Comment> findLast10Comments() {
-        return commentGenerator.generateComment().repeat(10);
+        return commentGenerator.generateComment().repeat(REPEAT_NUMBER_FOR_10_COMMENTS);
     }
 
     @GetMapping(path = "/comments/{artistId}/stream", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
