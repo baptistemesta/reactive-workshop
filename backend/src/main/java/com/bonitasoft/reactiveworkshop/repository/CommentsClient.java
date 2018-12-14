@@ -35,7 +35,7 @@ public class CommentsClient {
         this.restTemplate = restTemplateBuilder.rootUri(baseUrl).build();
     }
 
-    public List<Comment> getComments_resttemplate(String artistId) throws NotFoundException {
+    public List<Comment> getComments(String artistId) {
         log.info("Retrieving comments for artist {}", artistId);
         ResponseEntity<List<Comment>> response = restTemplate.exchange(
                 format("%s/comments/%s/last10", baseUrl, artistId),
@@ -48,14 +48,14 @@ public class CommentsClient {
         return comments;
     }
 
-    public List<Comment> getComments(String artistId) throws NotFoundException {
+    public List<Comment> getComments_using_flux(String artistId) {
         return getCommentsFlux(artistId)
                 .collectList()
                 .block()
                 ;
     }
 
-    public Flux<Comment> getCommentsFlux(String artistId) throws NotFoundException {
+    public Flux<Comment> getCommentsFlux(String artistId) {
         log.info("Retrieving comments flux for artist {}", artistId);
 
         return this.webClient.get().uri("/comments/{artistId}/last10", artistId)
