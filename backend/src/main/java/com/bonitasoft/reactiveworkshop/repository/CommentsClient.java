@@ -1,17 +1,22 @@
 package com.bonitasoft.reactiveworkshop.repository;
 
-import java.util.ArrayList;
+import static java.lang.String.format;
+import static org.springframework.http.HttpMethod.GET;
+
 import java.util.List;
 
 import com.bonitasoft.reactiveworkshop.domain.ArtistWithComments.Comment;
 import com.bonitasoft.reactiveworkshop.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 
 @Repository
 @Slf4j
@@ -32,21 +37,22 @@ public class CommentsClient {
 
     public List<Comment> getComments(String artistId) throws NotFoundException {
         log.info("Retrieving comments for artist {}", artistId);
-//        ParameterizedTypeReference<List<Comment>> commentListypeRef = new ParameterizedTypeReference<List<Comment>>() {};
-//        restTemplate.exchange(String.format("//%s/comments", artistId), HttpMethod.GET, commentListypeRef);
-
-        List<Comment> comments = new ArrayList<>();
-
-        this.webClient.get().uri("/comments/{artistId}/last10", artistId)
-                .retrieve().bodyToFlux(Comment.class)
-                .subscribe(c -> {
-                    log.info("Retrieved comment {}", c);
-//                    comments.add(c);
-                });
-        // wrong way to do, block is not allow in reactor 3.2+
-//                .collectList().block();
+        ResponseEntity<List<Comment>> response = restTemplate.exchange(
+                format("%s/comments/%s/last10", baseUrl, artistId),
+                GET,
+                null,
+                new ParameterizedTypeReference<List<Comment>>(){});
+        List<Comment> comments = response.getBody();
         log.info("Found {} comments", comments.size());
         return comments;
+    }
+
+    public Flux<Comment> getCommentsFlux(String artistId) throws NotFoundException {
+        log.info("Retrieving comments flux for artist {}", artistId);
+
+        return this.webClient.get().uri("/comments/{artistId}/last10", artistId)
+                .retrieve().bodyToFlux(Comment.class)
+                ;
     }
 
 }
