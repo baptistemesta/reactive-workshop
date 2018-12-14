@@ -7,10 +7,8 @@ import java.util.List;
 
 import com.bonitasoft.reactiveworkshop.domain.ArtistWithComments.Comment;
 import com.bonitasoft.reactiveworkshop.exception.NotFoundException;
-import io.netty.util.concurrent.SingleThreadEventExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.cglib.proxy.MethodProxy;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -18,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.result.method.annotation.RequestMappingHandlerAdapter;
 import reactor.core.publisher.Flux;
 
 @Repository
