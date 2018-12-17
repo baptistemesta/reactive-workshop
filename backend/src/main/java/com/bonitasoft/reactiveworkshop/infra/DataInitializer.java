@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.bonitasoft.reactiveworkshop.domain.Artist;
 import com.bonitasoft.reactiveworkshop.repository.ArtistRepository;
@@ -15,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Flux;
 
 @Component
 @Slf4j
@@ -47,9 +48,14 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
-        Flux.fromIterable(allArtists)
-                .distinct(Artist::getId)
-                .subscribe(repository::save);
+        Set<String> artistIds = new HashSet<>();
+
+        allArtists.stream()
+                .filter(a -> artistIds.add(a.getId()))
+                .forEach(repository::save);
+//        Flux.fromIterable(allArtists)
+//                .distinct(Artist::getId)
+//                .subscribe(repository::save);
 //                .subscribe(repository::insert);
 //                .deleteAll()
 //                .thenMany(
