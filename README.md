@@ -68,7 +68,7 @@ Run the `backend` with command `./gradlew :backend:bootRun`
 
 It will serve the application on `http://localhost:8080/`
 
-Try [this url to verify it works](http://localhost:8080/artists) (it currently a large amount of artists)
+Try [this url to verify it works](http://localhost:8080/artists) (it contains currently a large amount of artists)
 
 In the current state, it uses an embedded h2 database
 
