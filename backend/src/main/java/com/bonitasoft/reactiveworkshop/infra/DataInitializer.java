@@ -13,6 +13,7 @@ import java.util.Set;
 import com.bonitasoft.reactiveworkshop.domain.Artist;
 import com.bonitasoft.reactiveworkshop.repository.ArtistRepository;
 import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -45,7 +46,7 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
                 allArtists.add(artist);
 
             }
-        } catch (IOException e) {
+        } catch (IOException | CsvValidationException e) {
             throw new IllegalStateException(e);
         }
         Set<String> artistIds = new HashSet<>();

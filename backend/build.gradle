@@ -1,40 +1,30 @@
-buildscript {
-    ext {
-        springBootVersion = '2.1.1.RELEASE'
-    }
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    }
+import static Deps.*
+
+plugins {
+    id "org.springframework.boot" version "$springBootVersion"
+    id "io.spring.dependency-management" version "$springDepenencyMngtVersion"
+    id "java"
 }
 
-apply plugin: 'java'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-
-sourceCompatibility = 1.8
-configurations {
-    developmentOnly
-    runtimeClasspath {
-        extendsFrom developmentOnly
-    }
-}
+sourceCompatibility = "11"
 
 dependencies {
-    annotationProcessor "org.projectlombok:lombok:1.18.4"
-    compileOnly 'org.projectlombok:lombok:1.18.4'
-    compile 'com.opencsv:opencsv:4.4'
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    compile "com.opencsv:opencsv:${opencsvVersion}"
 
-    compile 'com.h2database:h2:1.4.195'
-    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
-    implementation('org.springframework.boot:spring-boot-starter-web')
+    compile "com.h2database:h2:${h2Version}"
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-web")
     // uncomment these line to use webflux (reactive) instead of normal web
-//    implementation('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
-//    implementation('org.springframework.boot:spring-boot-starter-webflux')
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
-    testImplementation('io.projectreactor:reactor-test')
+//    implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
+//    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("io.projectreactor:reactor-test")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
+}
+
+test {
+    useJUnitPlatform()
 }
 
