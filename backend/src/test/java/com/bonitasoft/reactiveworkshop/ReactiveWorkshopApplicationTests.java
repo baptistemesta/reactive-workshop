@@ -8,6 +8,7 @@ class ReactiveWorkshopApplicationTests {
 
 	@Test
 	void should_load_context() {
+		throw new IllegalStateException("NYI");
 	}
 
 }

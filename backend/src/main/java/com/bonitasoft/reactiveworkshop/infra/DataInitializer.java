@@ -54,19 +54,6 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
         allArtists.stream()
                 .filter(a -> artistIds.add(a.getId()))
                 .forEach(repository::save);
-//        Flux.fromIterable(allArtists)
-//                .distinct(Artist::getId)
-//                .subscribe(repository::save);
-//                .subscribe(repository::insert);
-//                .deleteAll()
-//                .thenMany(
-//                        Flux
-//                                .just("A", "B", "C", "D")
-//                                .map(name -> new Profile(UUID.randomUUID().toString(), name + "@email.com"))
-//                                .flatMap(repository::save)
-//                )
-//                .thenMany(repository.findAll())
-//                .subscribe(profile -> log.info("saving " + profile.toString()));
     }
 
     private String md5(String name) {

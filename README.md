@@ -43,7 +43,7 @@ It run on port `8080`
 
 ## How to run
 
-The only requirement is **JDK 8**. The project has not been tested with JDK 9+, so please only use JDK 8.
+The only requirement is **JDK 11**.
 
 ### IDE configuration
 
@@ -142,13 +142,10 @@ and return an infinite stream of json like this:
 }
 ```
 
+To do that, you will need to use a `WebClient` instead of the provided `RestTemplate`
 
-### Bonus
+### Containerize the application
 
-Replace h2 database by MongoDB and use reactive repository `ReactiveMongoRepository` instead of `JpaRepository` (for the class `com.bonitasoft.reactiveworkshop.repository.ArtistRepository`)
-
-You must run the MongoDB as a docker container using `docker run --name mongo -p 27017:27017 -d mongo:3.2`
-
-
+Package the application in a docker image and write a docker-compose to run it on Postgres.
 
 

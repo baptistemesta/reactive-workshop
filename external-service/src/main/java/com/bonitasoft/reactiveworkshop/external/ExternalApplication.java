@@ -32,7 +32,7 @@ public class ExternalApplication {
                 .repeat(REPEAT_NUMBER_FOR_10_COMMENTS);
 
     }
-    @GetMapping(path = "/comments/stream", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
+    @GetMapping(path = "/comments/stream", produces = MediaType.APPLICATION_NDJSON_VALUE)
     Flux<Comment> getStreamOfComment() {
         return commentGenerator.generateComment().repeat().delayElements(Duration.ofSeconds(1));
     }
@@ -41,7 +41,7 @@ public class ExternalApplication {
         return commentGenerator.generateComment().repeat(REPEAT_NUMBER_FOR_10_COMMENTS);
     }
 
-    @GetMapping(path = "/comments/{artistId}/stream", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
+    @GetMapping(path = "/comments/{artistId}/stream", produces = MediaType.APPLICATION_NDJSON_VALUE)
     Flux<Comment> getStreamOfComment(@PathVariable String artistId) {
         return commentGenerator.generateComment(artistId).repeat().delayElements(Duration.ofSeconds(1));
     }
