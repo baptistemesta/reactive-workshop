@@ -6,7 +6,7 @@
 You work for the `Music Artist` company as a backend developer.
 This company owns the largest database referencing music artists all around planet Earth.
 
-You are part of the `Music Artist API` Team which develops various API to access to the artist database.
+You are part of the `Music Artist API` Team which develops various APIs to access to the artist database.
 A new Product Owner has been recently hired and has just presented the new Roadmap for the next weeks.
 
 A new partnership has just been setup with the `Music Fans Social Network`. This platform allows music fans to post comments
@@ -28,9 +28,9 @@ There are 2 components
 
 ### `external-service`
 
-It simulates an external (distant) rest service. *There is no need to modify it as part of this challenge*.
+It simulates an external (distant) REST service. *There is no need to modify it as part of this challenge*.
 
-It run on port `3004` by default and provides `comments` API
+It runs on port `3004` by default and provides `comments` API
 
 See `com.bonitasoft.reactiveworkshop.external.ExternalApplication` 
 
@@ -38,7 +38,7 @@ See `com.bonitasoft.reactiveworkshop.external.ExternalApplication`
 
 The backend to work on.
 
-It run on port `8080`
+It runs on port `8080`
 
 
 ## How to run
@@ -77,9 +77,9 @@ In the current state, it uses an embedded h2 database
 
 :information_source: All code produced must be production-ready.
 
-### Add a new api method that return one artist and its 10 last comments
+### Add a new API method that returns one artist and its 10 last comments
 
-It should be called on this url: `http://localhost:8080/artist/{artistId}/comments`
+It should be called on this URL: `http://localhost:8080/artist/{artistId}/comments`
 
 and should return something like
 ```json
@@ -100,9 +100,9 @@ and should return something like
 }
 ```
 
-### Add a new api method that return a stream of comments and associated artists filtered by a genre name
+### Add a new API method that return a stream of comments and associated artists filtered by a genre name
 
-It should be called on this url: `http://localhost:8080/genre/{genre}/comments/stream`
+It should be called on this URL: `http://localhost:8080/genre/{genre}/comments/stream`
 
 and return an infinite stream of json like this:
 
