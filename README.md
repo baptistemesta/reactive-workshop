@@ -75,6 +75,8 @@ In the current state, it uses an embedded h2 database
 
 ## What to do
 
+:information_source: All code produced must be production-ready.
+
 ### Add a new api method that return one artist and its 10 last comments
 
 It should be called on this url: `http://localhost:8080/artist/{artistId}/comments`
@@ -98,29 +100,6 @@ and should return something like
 }
 ```
 
-
-### Add a new api method that return the 10 last comments and associated artists filtered by a genre name
-
-It should be called on this url: `http://localhost:8080/genre/{genre}/comments`
-
-and should return something like
-```json
-[
-      {
-        "artistId": "dfjksl342f32",
-        "artistName": "Radiohead",
-        "userName": "johndoe",
-        "comment": "Nice band!"
-      },
-      {
-        "artistId": "fdsklj39fsjl",
-        "artistName": "Archive",
-        "userName": "walterbates",
-        "comment": "It rocks"
-      }
-]
-```
-
 ### Add a new api method that return a stream of comments and associated artists filtered by a genre name
 
 It should be called on this url: `http://localhost:8080/genre/{genre}/comments/stream`
@@ -138,7 +117,7 @@ and return an infinite stream of json like this:
   "artistId": "fdsklj39fsjl",
   "artistName": "Archive",
   "userName": "walterbates",
-   "comment": "It rocks"
+  "comment": "It rocks"
 }
 ```
 
